@@ -1,16 +1,18 @@
 const http=require('http');
+const fs=require('fs');
 const port='8080';
+
+const about=fs.readFileSync('about.html');
+const help=fs.readFileSync('help.html');
 
 const server=http.createServer((req,res)=>
 	{
 		if(req.url==`/about`)
-			console.log(`running at /about`);
+			res.end(about);
 		else if(req.url==`/help`)
-			console.log(`running at /help`);
+			res.end(help);
 		else
-			console.log(`running at /`);
-                res.writeHead(200);
-	        res.end("Hello from 8080!!");
+			res.end("Hello from 8080!!");
         });
 
 server.listen(port,()=>
